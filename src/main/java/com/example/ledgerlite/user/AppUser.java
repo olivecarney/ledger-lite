@@ -14,10 +14,10 @@ public class AppUser {
 	@Id
 	private UUID id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 120)
 	private String name;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 255)
 	private String email;
 
 	@Column(nullable = false)

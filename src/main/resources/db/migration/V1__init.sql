@@ -15,7 +15,7 @@ create table accounts (
     id uuid primary key,
     user_id uuid not null references app_users(id),
     name varchar(120) not null,
-    currency char(3) not null,
+    currency varchar(3) not null,
     created_at timestamptz not null,
     unique (user_id, name)
 );

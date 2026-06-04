@@ -22,7 +22,7 @@ public class Account {
 	@JoinColumn(name = "user_id", nullable = false)
 	private AppUser user;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 120)
 	private String name;
 
 	@Column(nullable = false, length = 3)

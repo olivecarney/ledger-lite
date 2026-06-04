@@ -30,12 +30,13 @@ public class LedgerTransaction {
 	private Category category;
 
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(nullable = false, length = 16)
 	private TransactionType type;
 
 	@Column(nullable = false)
 	private long amountCents;
 
+	@Column(length = 255)
 	private String description;
 
 	@Column(nullable = false)

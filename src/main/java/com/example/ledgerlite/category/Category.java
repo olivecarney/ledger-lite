@@ -14,7 +14,7 @@ public class Category {
 	@Id
 	private UUID id;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 80)
 	private String name;
 
 	@Column(nullable = false)
