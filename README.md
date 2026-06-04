@@ -25,6 +25,16 @@ LedgerLite is a Java Spring Boot/PostgreSQL finance ledger API focused on transa
 - GitHub Actions
 - springdoc OpenAPI
 
+## Domain model
+
+LedgerLite models balances from immutable transaction records rather than storing manually editable balance values.
+
+- A user owns one or more accounts.
+- An account has a currency and a list of transactions.
+- Transactions are either `INCOME` or `EXPENSE`.
+- Balances are calculated by summing income and subtracting expenses.
+- Amounts are stored as integer cents to avoid floating-point rounding errors.
+
 ## Run locally
 
 Start PostgreSQL:
@@ -96,6 +106,21 @@ curl -X POST http://localhost:8080/transactions \
   -d '{"accountId":"<account-id>","type":"INCOME","amountCents":125000,"description":"Salary"}'
 ```
 
+Example response:
+
+```json
+{
+  "id": "2c2b0f3b-8d45-48e5-a622-3a0f89cc0a61",
+  "accountId": "7a26c3e5-5d52-4e4e-a40c-dc81ce4f32d9",
+  "categoryId": null,
+  "type": "INCOME",
+  "amountCents": 125000,
+  "description": "Salary",
+  "occurredAt": "2026-06-04T19:30:00Z",
+  "createdAt": "2026-06-04T19:30:00Z"
+}
+```
+
 Add an expense:
 
 ```bash
@@ -108,4 +133,14 @@ Get the balance:
 
 ```bash
 curl http://localhost:8080/accounts/<account-id>/balance
+```
+
+Example response:
+
+```json
+{
+  "accountId": "7a26c3e5-5d52-4e4e-a40c-dc81ce4f32d9",
+  "currency": "GBP",
+  "balanceCents": 120475
+}
 ```
